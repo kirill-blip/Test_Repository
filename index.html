@@ -37,6 +37,8 @@
         // Значения получены
         // MyGameInstance.SendMessage('Test', 'ShowData', data.keys.values);
         console.log(data.keys);
+        let temp = data.keys.join(";");
+        console.log("String: \n" + temp);
       }
     }).catch((error) => {
       // Ошибка
