@@ -22,28 +22,9 @@
     </div>
     <div id="unity-warning"> </div>
   </div>
-
+  
   <script>
     vkBridge.send("VKWebAppInit", {});
-
-    vkBridge.send('VKWebAppStorageGet', {
-      keys: [
-        '3x3',
-        '4x4',
-        '5x5'
-      ]
-    }).then((data) => {
-      if (data.keys) {
-        // Значения получены
-        // MyGameInstance.SendMessage('Test', 'ShowData', data.keys.values);
-        console.log(data.keys);
-        let temp = data.keys.join(";");
-        console.log("String: \n" + temp);
-      }
-    }).catch((error) => {
-      // Ошибка
-      console.log(error);
-    });
   </script>
 
   <script>
@@ -83,13 +64,13 @@
     var config = {
       dataUrl: buildUrl + "/Test_1.data",
       frameworkUrl: buildUrl + "/Test_1.framework.js",
-      codeUrl: buildUrl + "/Test_1.wasm",
-      streamingAssetsUrl: "StreamingAssets",
+        codeUrl: buildUrl + "/Test_1.wasm",
+        streamingAssetsUrl: "StreamingAssets",
       companyName: "DefaultCompany",
-      productName: "Test",
-      productVersion: "1.0.0",
-      showBanner: unityShowBanner,
-    };
+    productName: "Test",
+    productVersion: "1.0.0",
+    showBanner: unityShowBanner,
+      };
 
     // By default Unity keeps WebGL canvas render target size matched with
     // the DOM size of the canvas element (scaled by window.devicePixelRatio)

@@ -1166,29 +1166,29 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 2431492: function() {
+ 2433624: function() {
   Module["emscripten_get_now_backup"] = performance.now;
  },
- 2431547: function($0) {
+ 2433679: function($0) {
   performance.now = function() {
    return $0;
   };
  },
- 2431595: function($0) {
+ 2433727: function($0) {
   performance.now = function() {
    return $0;
   };
  },
- 2431643: function() {
+ 2433775: function() {
   performance.now = Module["emscripten_get_now_backup"];
  },
- 2431698: function() {
+ 2433830: function() {
   return Module.webglContextAttributes.premultipliedAlpha;
  },
- 2431759: function() {
+ 2433891: function() {
   return Module.webglContextAttributes.preserveDrawingBuffer;
  },
- 2431823: function() {
+ 2433955: function() {
   return Module.webglContextAttributes.powerPreference;
  }
 };
@@ -1292,12 +1292,12 @@ function stackTrace() {
  return demangleAll(js);
 }
 
-function _GetData(key) {
+function _GetData(keys) {
  vkBridge.send("VKWebAppStorageGet", {
-  keys: [ UTF8ToString(key) ]
+  keys: [ UTF8ToString(key[0]), UTF8ToString(key[1]), UTF8ToString(key[2]) ]
  }).then(data => {
   if (data.keys) {
-   MyGameInstance.SendMessage("Test", "ShowData", data.keys[0].value);
+   MyGameInstance.SendMessage("Test", "ShowData", JSON.stringify(data));
   }
  }).catch(error => {
   console.log(error);
@@ -13622,6 +13622,8 @@ var dynCall_iiifii = Module["dynCall_iiifii"] = createExportWrapper("dynCall_iii
 
 var dynCall_viiiifii = Module["dynCall_viiiifii"] = createExportWrapper("dynCall_viiiifii");
 
+var dynCall_viiffi = Module["dynCall_viiffi"] = createExportWrapper("dynCall_viiffi");
+
 var dynCall_fiii = Module["dynCall_fiii"] = createExportWrapper("dynCall_fiii");
 
 var dynCall_fifi = Module["dynCall_fifi"] = createExportWrapper("dynCall_fifi");
@@ -13675,8 +13677,6 @@ var dynCall_vjiiiii = Module["dynCall_vjiiiii"] = createExportWrapper("dynCall_v
 var dynCall_iiji = Module["dynCall_iiji"] = createExportWrapper("dynCall_iiji");
 
 var dynCall_viiiji = Module["dynCall_viiiji"] = createExportWrapper("dynCall_viiiji");
-
-var dynCall_viiffi = Module["dynCall_viiffi"] = createExportWrapper("dynCall_viiffi");
 
 var dynCall_viiiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiiii"] = createExportWrapper("dynCall_viiiiiiiiiiiiii");
 
@@ -14333,6 +14333,17 @@ function invoke_viifi(index, a1, a2, a3, a4) {
  }
 }
 
+function invoke_viiffi(index, a1, a2, a3, a4, a5) {
+ var sp = stackSave();
+ try {
+  dynCall_viiffi(index, a1, a2, a3, a4, a5);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
 function invoke_vifi(index, a1, a2, a3) {
  var sp = stackSave();
  try {
@@ -14414,17 +14425,6 @@ function invoke_viiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8) {
  var sp = stackSave();
  try {
   dynCall_viiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
-function invoke_viiffi(index, a1, a2, a3, a4, a5) {
- var sp = stackSave();
- try {
-  dynCall_viiffi(index, a1, a2, a3, a4, a5);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
