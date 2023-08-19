@@ -1166,29 +1166,29 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 2433624: function() {
+ 2433560: function() {
   Module["emscripten_get_now_backup"] = performance.now;
  },
- 2433679: function($0) {
+ 2433615: function($0) {
   performance.now = function() {
    return $0;
   };
  },
- 2433727: function($0) {
+ 2433663: function($0) {
   performance.now = function() {
    return $0;
   };
  },
- 2433775: function() {
+ 2433711: function() {
   performance.now = Module["emscripten_get_now_backup"];
  },
- 2433830: function() {
+ 2433766: function() {
   return Module.webglContextAttributes.premultipliedAlpha;
  },
- 2433891: function() {
+ 2433827: function() {
   return Module.webglContextAttributes.preserveDrawingBuffer;
  },
- 2433955: function() {
+ 2433891: function() {
   return Module.webglContextAttributes.powerPreference;
  }
 };
@@ -1292,7 +1292,7 @@ function stackTrace() {
  return demangleAll(js);
 }
 
-function _GetData(keys) {
+function _GetData(firstKey, secondKey, thirdKey) {
  vkBridge.send("VKWebAppStorageGet", {
   keys: [ UTF8ToString(key[0]), UTF8ToString(key[1]), UTF8ToString(key[2]) ]
  }).then(data => {
