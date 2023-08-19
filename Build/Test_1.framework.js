@@ -2774,8 +2774,8 @@ function _JS_UnityEngineShouldQuit() {
 
 function _SaveData(key, value) {
  vkBridge.send("VKWebAppStorageSet", {
-  key: key,
-  value: value
+  key: UTF8ToString(key),
+  value: UTF8ToString(value)
  }).then(data => {
   if (data.result) {
    MyGameInstance.SendMessage("Test", "SaveDataDone");
