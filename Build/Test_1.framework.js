@@ -1294,7 +1294,7 @@ function stackTrace() {
 
 function _GetData(firstKey, secondKey, thirdKey) {
  vkBridge.send("VKWebAppStorageGet", {
-  keys: [ UTF8ToString(key[0]), UTF8ToString(key[1]), UTF8ToString(key[2]) ]
+  keys: [ UTF8ToString(firstKey), UTF8ToString(secondKey), UTF8ToString(thirdKey) ]
  }).then(data => {
   if (data.keys) {
    MyGameInstance.SendMessage("Test", "ShowData", JSON.stringify(data));
