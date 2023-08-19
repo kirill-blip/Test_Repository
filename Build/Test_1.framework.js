@@ -1166,29 +1166,29 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 2431860: function() {
+ 2431492: function() {
   Module["emscripten_get_now_backup"] = performance.now;
  },
- 2431915: function($0) {
+ 2431547: function($0) {
   performance.now = function() {
    return $0;
   };
  },
- 2431963: function($0) {
+ 2431595: function($0) {
   performance.now = function() {
    return $0;
   };
  },
- 2432011: function() {
+ 2431643: function() {
   performance.now = Module["emscripten_get_now_backup"];
  },
- 2432066: function() {
+ 2431698: function() {
   return Module.webglContextAttributes.premultipliedAlpha;
  },
- 2432127: function() {
+ 2431759: function() {
   return Module.webglContextAttributes.preserveDrawingBuffer;
  },
- 2432191: function() {
+ 2431823: function() {
   return Module.webglContextAttributes.powerPreference;
  }
 };
@@ -1290,6 +1290,18 @@ function stackTrace() {
  var js = jsStackTrace();
  if (Module["extraStackTrace"]) js += "\n" + Module["extraStackTrace"]();
  return demangleAll(js);
+}
+
+function _GetData(key) {
+ vkBridge.send("VKWebAppStorageGet", {
+  keys: [ key ]
+ }).then(data => {
+  if (data.keys) {
+   MyGameInstance.SendMessage("Test", "ShowData", data.keys[0].value);
+  }
+ }).catch(error => {
+  console.log(error);
+ });
 }
 
 function _HelloString(str) {
@@ -2758,6 +2770,19 @@ function _JS_SystemInfo_HasWebGL() {
 
 function _JS_UnityEngineShouldQuit() {
  return !!Module.shouldQuit;
+}
+
+function _SaveData(key, value) {
+ vkBridge.send("VKWebAppStorageSet", {
+  key: key,
+  value: value
+ }).then(data => {
+  if (data.result) {
+   MyGameInstance.SendMessage("Test", "SaveDataDone");
+  }
+ }).catch(error => {
+  console.log(error);
+ });
 }
 
 var ExceptionInfoAttrs = {
@@ -7458,18 +7483,6 @@ function _difftime(time1, time0) {
 }
 
 function _dlclose(handle) {}
-
-function _dlerror() {
- return 0;
-}
-
-function _dlopen(filename, flag) {
- warnOnce("Unable to open DLL " + UTF8ToString(filename) + "! Dynamic linking is not supported in WebAssembly builds due to limitations to performance and code size. Please statically link in the needed libraries.");
-}
-
-function _dlsym(handle, symbol) {
- return 0;
-}
 
 var readAsmConstArgsArray = [];
 
@@ -12926,6 +12939,7 @@ function intArrayFromString(stringy, dontAddNull, length) {
 }
 
 var asmLibraryArg = {
+ "GetData": _GetData,
  "HelloString": _HelloString,
  "JS_Accelerometer_IsRunning": _JS_Accelerometer_IsRunning,
  "JS_Accelerometer_Start": _JS_Accelerometer_Start,
@@ -12989,6 +13003,7 @@ var asmLibraryArg = {
  "JS_SystemInfo_HasFullscreen": _JS_SystemInfo_HasFullscreen,
  "JS_SystemInfo_HasWebGL": _JS_SystemInfo_HasWebGL,
  "JS_UnityEngineShouldQuit": _JS_UnityEngineShouldQuit,
+ "SaveData": _SaveData,
  "__cxa_allocate_exception": ___cxa_allocate_exception,
  "__cxa_atexit": ___cxa_atexit,
  "__cxa_begin_catch": ___cxa_begin_catch,
@@ -13037,9 +13052,6 @@ var asmLibraryArg = {
  "clock_gettime": _clock_gettime,
  "difftime": _difftime,
  "dlclose": _dlclose,
- "dlerror": _dlerror,
- "dlopen": _dlopen,
- "dlsym": _dlsym,
  "emscripten_asm_const_int": _emscripten_asm_const_int,
  "emscripten_asm_const_int_sync_on_main_thread": _emscripten_asm_const_int_sync_on_main_thread,
  "emscripten_cancel_main_loop": _emscripten_cancel_main_loop,
