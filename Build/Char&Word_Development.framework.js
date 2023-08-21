@@ -1316,6 +1316,18 @@ function _GetData(key) {
  });
 }
 
+function _GetDataSet(firstKey, secondKey) {
+ vkBridge.send("VKWebAppStorageGet", {
+  keys: [ UTF8ToString(firstKey), UTF8ToString(secondKey) ]
+ }).then(data => {
+  if (data.keys) {
+   myUnityInstance.SendMessage("DataGetter", "GetData", JSON.stringify(data));
+  }
+ }).catch(error => {
+  console.log(error);
+ });
+}
+
 function _GetLanguage() {
  var returnStr = "ru";
  var bufferSize = lengthBytesUTF8(returnStr) + 1;
@@ -13842,6 +13854,7 @@ function intArrayFromString(stringy, dontAddNull, length) {
 var asmLibraryArg = {
  "CheckBannerAd": _CheckBannerAd,
  "GetData": _GetData,
+ "GetDataSet": _GetDataSet,
  "GetLanguage": _GetLanguage,
  "IsMobile": _IsMobile,
  "JS_Accelerometer_IsRunning": _JS_Accelerometer_IsRunning,
