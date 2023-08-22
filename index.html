@@ -11,8 +11,7 @@
 </head>
 
 <body>
-  <div id="unity-container" class="unity-desktop"
-    style="background-color: blue;">
+  <div id="unity-container" class="unity-desktop" style="background-color: blue;">
     <canvas id="unity-canvas"
       style="background-color: rgb(44, 24, 24); position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
     <div id="unity-loading-bar">
@@ -26,18 +25,18 @@
   <script>
     vkBridge.send("VKWebAppInit", {});
 
-    vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'interstitial'});
+    vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'interstitial' });
 
     vkBridge.send('VKWebAppShowBannerAd', {
       banner_location: 'bottom',
       layout_type: 'resize'
-    }).then((data) => { 
+    }).then((data) => {
       if (data.result) {
         // Баннерная реклама отобразилась
       }
     }).catch((error) => {
-        // Ошибка
-        console.log(error);
+      // Ошибка
+      console.log(error);
     });
 
     vkBridge.subscribe((e) => {
@@ -117,16 +116,16 @@
     }
 
     var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Char&Word_Development.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/Char&Word_Development.data",
-        frameworkUrl: buildUrl + "/Char&Word_Development.framework.js",
+    var loaderUrl = buildUrl + "/Char&Word_Development.loader.js";
+    var config = {
+      dataUrl: buildUrl + "/Char&Word_Development.data",
+      frameworkUrl: buildUrl + "/Char&Word_Development.framework.js",
         codeUrl: buildUrl + "/Char&Word_Development.wasm",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "K-Blip Company",
-        productName: "Char_Word",
-        productVersion: "1.1.0",
-        showBanner: unityShowBanner,
+      companyName: "K-Blip Company",
+    productName: "Char&Word",
+    productVersion: "1.0.0",
+    showBanner: unityShowBanner,
       };
 
     // By default Unity keeps WebGL canvas render target size matched with
