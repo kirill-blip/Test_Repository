@@ -56,9 +56,9 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/AstronomicalGuardian_WebGL.loader.js";
       var config = {
-        dataUrl: buildUrl + "/AstronomicalGuardian_WebGL.data",
-        frameworkUrl: buildUrl + "/AstronomicalGuardian_WebGL.framework.js",
-        codeUrl: buildUrl + "/AstronomicalGuardian_WebGL.wasm",
+        dataUrl: buildUrl + "/AstronomicalGuardian_WebGL.data.unityweb",
+        frameworkUrl: buildUrl + "/AstronomicalGuardian_WebGL.framework.js.unityweb",
+        codeUrl: buildUrl + "/AstronomicalGuardian_WebGL.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "RogalikkGames",
         productName: "AstronomicalGuardian3D",
@@ -86,6 +86,8 @@
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
+
+        unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
