@@ -10,7 +10,6 @@
   
   <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 
-
 </head>
 
 <body>
@@ -23,6 +22,8 @@
         <div id="unity-progress-bar-full"></div>
       </div>
     </div>
+
+    <div id="unity-warning"> </div>
   </div>
   <script>
     vkBridge.send("VKWebAppInit", {});
@@ -49,7 +50,7 @@
     var canvas = document.querySelector("#unity-canvas");
     var loadingBar = document.querySelector("#unity-loading-bar");
     var progressBarFull = document.querySelector("#unity-progress-bar-full");
-    // var warningBanner = document.querySelector("#unity-warning");
+    var warningBanner = document.querySelector("#unity-warning");
 
     // Shows a temporary message banner/ribbon for a few seconds, or
     // a permanent error message on top of the canvas if type=='error'.
@@ -85,7 +86,7 @@
       companyName: "Rogalikk Game",
     productName: "Puzzle Game",
     productVersion: "1.0.0",
-    showBanner: unityShowBanner,
+    // showBanner: unityShowBanner,
       };
 
     // By default, Unity keeps WebGL canvas render target size matched with
