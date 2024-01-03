@@ -42,17 +42,7 @@
     //   console.log(error);
     // });
 
-    vkBridge.send('VKWebAppGetClientVersion')
-      .then((data) => {
-        if (data.platform) {
-          console.log(data.platform);
-          myGameInstance.SendMessage('Canvas', 'SetPlatform', data.platform);
-        }
-      })
-      .catch((error) => {
-        // Ошибка
-        console.log(error);
-      });
+
   </script>
 
   <script>
@@ -92,13 +82,13 @@
     var config = {
       dataUrl: buildUrl + "/PuzzleGames_WebGL.data",
       frameworkUrl: buildUrl + "/PuzzleGames_WebGL.framework.js",
-        codeUrl: buildUrl + "/PuzzleGames_WebGL.wasm",
-        streamingAssetsUrl: "StreamingAssets",
+      codeUrl: buildUrl + "/PuzzleGames_WebGL.wasm",
+      streamingAssetsUrl: "StreamingAssets",
       companyName: "Rogalikk Game",
-    productName: "Puzzle game",
-    productVersion: "1.0.0",
-    showBanner: unityShowBanner,
-      };
+      productName: "Puzzle game",
+      productVersion: "1.0.0",
+      showBanner: unityShowBanner,
+    };
 
     // By default, Unity keeps WebGL canvas render target size matched with
     // the DOM size of the canvas element (scaled by window.devicePixelRatio)
@@ -142,6 +132,17 @@
         loadingBar.style.display = "none";
 
         myGameInstance = unityInstance;
+        vkBridge.send('VKWebAppGetClientVersion')
+          .then((data) => {
+            if (data.platform) {
+              console.log(data.platform);
+              myGameInstance.SendMessage('Canvas', 'SetPlatform', data.platform);
+            }
+          })
+          .catch((error) => {
+            // Ошибка
+            console.log(error);
+          });
       }).catch((message) => {
         alert(message);
       });
