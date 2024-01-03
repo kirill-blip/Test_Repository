@@ -42,6 +42,17 @@
       // Ошибка
       console.log(error);
     });
+
+    vkBridge.send('VKWebAppGetClientVersion')
+            .then((data) => {
+                if (data.platform) {
+                    console.log(data.platform);
+                }
+            })
+            .catch((error) => {
+                // Ошибка
+                console.log(error);
+            });
   </script>
 
   <script>
