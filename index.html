@@ -143,6 +143,17 @@
             // Ошибка
             console.log(error);
           });
+
+        vkBridge.send('VKWebAppGetLaunchParams')
+          .then((data) => {
+            if (data.vk_language) {
+              console.log("Language is " + data.vk_language)
+            }
+          })
+          .catch((error) => {
+            // Ошибка
+            console.log(error);
+          });
       }).catch((message) => {
         alert(message);
       });
