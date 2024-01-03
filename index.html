@@ -10,6 +10,7 @@
 
   <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 
+
 </head>
 
 <body>
@@ -28,36 +29,24 @@
   <script>
     vkBridge.send("VKWebAppInit", {});
 
-    vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'interstitial' });
-
-    vkBridge.send('VKWebAppShowBannerAd', {
-      banner_location: 'bottom',
-      layout_type: 'resize',
-      can_close: false
-    }).then((data) => {
-      if (data.result) {
-        // Баннерная реклама отобразилась
-      }
-    }).catch((error) => {
-      // Ошибка
-      console.log(error);
-    });
+    // vkBridge.send('VKWebAppShowBannerAd', {
+    //   banner_location: 'bottom',
+    //   layout_type: 'resize',
+    //   can_close: false
+    // }).then((data) => {
+    //   if (data.result) {
+    //     // Баннерная реклама отобразилась
+    //   }
+    // }).catch((error) => {
+    //   // Ошибка
+    //   console.log(error);
+    // });
 
     vkBridge.send('VKWebAppGetClientVersion')
       .then((data) => {
         if (data.platform) {
           console.log(data.platform);
-        }
-      })
-      .catch((error) => {
-        // Ошибка
-        console.log(error);
-      });
-
-    vkBridge.send('VKWebAppGetClientVersion')
-      .then((data) => {
-        if (data.platform) {
-          myUnityInstance.SendMessage('Canvas', 'SetPlatform', data.platform);
+          myGameInstance.SendMessage('Canvas', 'SetPlatform', data.platform);
         }
       })
       .catch((error) => {
@@ -101,15 +90,15 @@
     var buildUrl = "Build";
     var loaderUrl = buildUrl + "/PuzzleGames_WebGL.loader.js";
     var config = {
-      dataUrl: buildUrl + "/PuzzleGames_WebGL.data.br",
-      frameworkUrl: buildUrl + "/PuzzleGames_WebGL.framework.js.br",
-      codeUrl: buildUrl + "/PuzzleGames_WebGL.wasm.br",
-      streamingAssetsUrl: "StreamingAssets",
+      dataUrl: buildUrl + "/PuzzleGames_WebGL.data",
+      frameworkUrl: buildUrl + "/PuzzleGames_WebGL.framework.js",
+        codeUrl: buildUrl + "/PuzzleGames_WebGL.wasm",
+        streamingAssetsUrl: "StreamingAssets",
       companyName: "Rogalikk Game",
-      productName: "Puzzle Game",
-      productVersion: "1.0.0",
-      // showBanner: unityShowBanner,
-    };
+    productName: { { { JSON.stringify(PRODUCT_NAME) } } },
+    productVersion: { { { JSON.stringify(PRODUCT_VERSION) } } },
+    showBanner: unityShowBanner,
+      };
 
     // By default, Unity keeps WebGL canvas render target size matched with
     // the DOM size of the canvas element (scaled by window.devicePixelRatio)
@@ -152,7 +141,7 @@
       }).then((unityInstance) => {
         loadingBar.style.display = "none";
 
-        myUnityInstance = unityInstance;
+        myGameInstance = unityInstance;
       }).catch((message) => {
         alert(message);
       });

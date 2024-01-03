@@ -1994,13 +1994,13 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  5176272: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
- 5176333: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
- 5176397: function() {return Module.webglContextAttributes.powerPreference;},  
- 5176455: function() {Module['emscripten_get_now_backup'] = performance.now;},  
- 5176510: function($0) {performance.now = function() { return $0; };},  
- 5176558: function($0) {performance.now = function() { return $0; };},  
- 5176606: function() {performance.now = Module['emscripten_get_now_backup'];}
+  5176304: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
+ 5176365: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
+ 5176429: function() {return Module.webglContextAttributes.powerPreference;},  
+ 5176487: function() {Module['emscripten_get_now_backup'] = performance.now;},  
+ 5176542: function($0) {performance.now = function() { return $0; };},  
+ 5176590: function($0) {performance.now = function() { return $0; };},  
+ 5176638: function() {performance.now = Module['emscripten_get_now_backup'];}
 };
 
 
@@ -4755,6 +4755,10 @@ var ASM_CONSTS = {
   
           requestOptions.timeout = timeout;
   	}
+
+  function _ShowMessage(message) {
+          console.log(UTF8ToString(message));
+      }
 
   function ___assert_fail(condition, filename, line, func) {
       abort('Assertion failed: ' + UTF8ToString(condition) + ', at: ' + [filename ? UTF8ToString(filename) : 'unknown filename', line, func ? UTF8ToString(func) : 'unknown function']);
@@ -16005,6 +16009,7 @@ var asmLibraryArg = {
   "JS_WebRequest_SetRedirectLimit": _JS_WebRequest_SetRedirectLimit,
   "JS_WebRequest_SetRequestHeader": _JS_WebRequest_SetRequestHeader,
   "JS_WebRequest_SetTimeout": _JS_WebRequest_SetTimeout,
+  "ShowMessage": _ShowMessage,
   "__assert_fail": ___assert_fail,
   "__cxa_allocate_exception": ___cxa_allocate_exception,
   "__cxa_begin_catch": ___cxa_begin_catch,
