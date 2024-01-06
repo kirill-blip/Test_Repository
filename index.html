@@ -112,6 +112,8 @@
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
 
+          myUnityInstance = unityInstance;
+
           vkBridge.send('VKWebAppGetClientVersion')
             .then((data) => {
               if (data.platform) {
