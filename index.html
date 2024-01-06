@@ -29,14 +29,14 @@
     vkBridge.send("VKWebAppInit", {});
 
     vkBridge.subscribe((e) => {
-      if (e.detail.type === 'VKWebAppViewHide') {
+      if (e.detail.type == 'VKWebAppViewHide') {
         // Действия при переключении из игры или мини приложения
         myUnityInstance.SendMessage('Music', 'StopAllMusic');
       }
     });
 
     vkBridge.subscribe((e) => {
-      if (e.detail.type === 'VKWebAppViewRestore') {
+      if (e.detail.type == 'VKWebAppViewRestore') {
         // Действия при восстановлении экрана игры или мини приложения
         myUnityInstance.SendMessage('Music', 'StartAllMusic');
       }
