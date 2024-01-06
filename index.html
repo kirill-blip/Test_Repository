@@ -27,6 +27,7 @@
     <script>
       vkBridge.send("VKWebAppInit", {});
     </script>
+
     <script>
 
       var container = document.querySelector("#unity-container");
@@ -60,11 +61,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/PuzzleGame.loader.js";
+      var loaderUrl = buildUrl + "/WebGl.loader.js";
       var config = {
-        dataUrl: buildUrl + "/PuzzleGame.data",
-        frameworkUrl: buildUrl + "/PuzzleGame.framework.js",
-        codeUrl: buildUrl + "/PuzzleGame.wasm",
+        dataUrl: buildUrl + "/WebGl.data",
+        frameworkUrl: buildUrl + "/WebGl.framework.js",
+        codeUrl: buildUrl + "/WebGl.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Rogalikk Game",
         productName: "PuzzleGame",
@@ -97,8 +98,6 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        // canvas.style.width = "960px";
-        // canvas.style.height = "600px";
       }
 
       loadingBar.style.display = "block";
@@ -113,7 +112,6 @@
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
 
-          myUnityInstance = unityInstance;
           vkBridge.send('VKWebAppGetClientVersion')
             .then((data) => {
               if (data.platform) {
