@@ -29,14 +29,14 @@
     vkBridge.send("VKWebAppInit", {});
 
     vkBridge.subscribe((e) => {
-      if (e.detail.type == 'VKWebAppViewHide') {
+      if (e.detail.type === 'VKWebAppViewHide') {
         // Действия при переключении из игры или мини приложения
         myUnityInstance.SendMessage('Music', 'StopAllMusic');
       }
     });
 
     vkBridge.subscribe((e) => {
-      if (e.detail.type == 'VKWebAppViewRestore') {
+      if (e.detail.type === 'VKWebAppViewRestore') {
         // Действия при восстановлении экрана игры или мини приложения
         myUnityInstance.SendMessage('Music', 'StartAllMusic');
       }
@@ -127,10 +127,12 @@
 
         myUnityInstance = unityInstance;
 
+        var platform = "";
+
         vkBridge.send('VKWebAppGetClientVersion')
           .then((data) => {
             if (data.platform) {
-              console.log(data.platform);
+              platform = data.platform;
               myUnityInstance.SendMessage('Canvas', 'SetPlatform', data.platform);
             }
           })
@@ -138,6 +140,20 @@
             console.log(error);
           });
 
+        if (platform == "web") {
+          vkBridge.send('VKWebAppShowBannerAd', {
+            banner_location: 'bottom',
+            layout_type: 'resize',
+            can_close: 'false'
+          })
+            .then((data) => {
+              if (data.result) {
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       }).catch((message) => {
         alert(message);
       });
